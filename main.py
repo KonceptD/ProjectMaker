@@ -10,19 +10,17 @@ import re
 # Milestones: “reduce the number of things you have to think about at any one time”.
 # https://robertheaton.com/ppab7-auto-project-builder/
 
-pattern = set(("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-"))
-
-# TODO: Validation - tried regex, and issubset
+# ^ signals start of string, $ signals end of it in the "re" documentation
+pattern = "^[A-Za-z0-9_- ]$"
 
 while True:
         projectName = input("What is the title of your project? ").ljust(40)
-        validation = set(projectName)
-        validation.issubset(pattern)
-        if validation:
-            break
-        else:
+        state = bool(re.match(pattern, projectName))
+        if not state:
             print("Invalid input, please try again")
             continue
+        else:
+            break
 
 
 
