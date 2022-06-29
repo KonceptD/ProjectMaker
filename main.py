@@ -1,4 +1,6 @@
 import re
+import os
+import random
 
 # Milestones
 # 1. Ask for the project name and author
@@ -16,34 +18,63 @@ import re
 
 # Validates user input and length
 
-i = 0
-while True:
-    projectName = input("What is the title of your project? ")
-    state = bool(projectName.isidentifier())
+# i = 0
+# while True:
+#     projectName = input("What is the title of your project? ")
+#     state = bool(projectName.isidentifier())
+#
+#     if not state:
+#         i += 1
+#         if i == 3:
+#             print("I give up")
+#             exit()
+#         else:
+#             print("Invalid input, please try again")
+#             continue
+#     elif len(projectName) < 1 or len(projectName) > 40:
+#         print("Please enter a name between 1-40 characters")
+#         continue
+#     else:
+#         break
+#
+# # Validates user input length
+# while True:
+#     projectAuthor = input("Who is the author of this project? ")
+#     if len(projectAuthor) < 1 or len(projectAuthor) > 40:
+#         print("Please enter a name between 1-40 characters")
+#         continue
+#     else:
+#         break
+#
+# print("## PROJECT DETAILS ##")
+# print("Project name: " + projectName)
+# print("Author: " + projectAuthor)
 
-    if not state:
-        i += 1
-        if i == 3:
-            print("I give up")
-            exit()
-        else:
-            print("Invalid input, please try again")
+# direct = "C:\\Users\\User\\PycharmProjects\\"
+# input_new = input("Enter a new Project folder name: ")
+# new_path = os.path.join(direct, input_new)
+# os.mkdir(new_path, mode=0o666)
+# print("Directory '% s' is built!" % new_path)
+
+while True:
+
+    direct = "C:\\Users\\User\\PycharmProjects\\"
+    input_new = input("Enter a new Project folder name: ")
+    new_path = os.path.join(direct, input_new)
+    # os.mkdir(new_path, mode=0o666)
+    # print("Directory '% s' is built!" % new_path)
+    #
+    if os.path.exists(new_path):
+        input_new = input("Directory already exists. Enter a new Project folder name: ")
+        new_path = os.path.join(direct, input_new)
+        if os.path.exists(new_path):
+            print("Directory already exists")
             continue
-    elif len(projectName) < 1 or len(projectName) > 40:
-        print("Please enter a name between 1-40 characters")
-        continue
+        else:
+            os.mkdir(new_path, mode=0o666)
+            print("Directory '% s' is built!" % new_path)
+            break
     else:
+        os.mkdir(new_path, mode=0o666)
+        print("Directory '% s' is built!" % new_path)
         break
-
-# Validates user input length
-while True:
-    projectAuthor = input("Who is the author of this project? ")
-    if len(projectAuthor) < 1 or len(projectAuthor) > 40:
-        print("Please enter a name between 1-40 characters")
-        continue
-    else:
-        break
-
-print("## PROJECT DETAILS ##")
-print("Project name: " + projectName)
-print("Author: " + projectAuthor)
