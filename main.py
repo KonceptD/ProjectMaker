@@ -11,23 +11,31 @@ import re
 # https://robertheaton.com/ppab7-auto-project-builder/
 
 # ^ signals start of string, $ signals end of it in the "re" documentation
-pattern = "^[A-Za-z0-9_- ]$"
 
+# .ljust(40) was conflicting with my validation
+
+# Validates user input and length
 while True:
-        projectName = input("What is the title of your project? ").ljust(40)
-        state = bool(re.match(pattern, projectName))
-        if not state:
-            print("Invalid input, please try again")
-            continue
-        else:
-            break
+    projectName = input("What is the title of your project? ")
+    state = bool(projectName.isidentifier())
+    if not state:
+        print("Invalid input, please try again")
+        continue
+    elif len(projectName) < 1 or len(projectName) > 40:
+        print("Please enter a name between 1-40 characters")
+        continue
+    else:
+        break
 
-
-
-
-projectAuthor = input("Who is the author of this project? ").ljust(40)
-
+# Validates user input length
+while True:
+    projectAuthor = input("Who is the author of this project? ")
+    if len(projectAuthor) < 1 or len(projectAuthor) > 40:
+        print("Please enter a name between 1-40 characters")
+        continue
+    else:
+        break
 
 print("## PROJECT DETAILS ##")
-print("Project name: "+ projectName)
-print("Author: "+ projectAuthor)
+print("Project name: " + projectName)
+print("Author: " + projectAuthor)
