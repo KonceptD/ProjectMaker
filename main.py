@@ -18,38 +18,40 @@ import random
 
 # Validates user input and length
 
-# i = 0
-# while True:
-#     projectName = input("What is the title of your project? ")
-#     state = bool(projectName.isidentifier())
-#
-#     if not state:
-#         i += 1
-#         if i == 3:
-#             print("I give up")
-#             exit()
-#         else:
-#             print("Invalid input, please try again")
-#             continue
-#     elif len(projectName) < 1 or len(projectName) > 40:
-#         print("Please enter a name between 1-40 characters")
-#         continue
-#     else:
-#         break
-#
-# # Validates user input length
-# while True:
-#     projectAuthor = input("Who is the author of this project? ")
-#     if len(projectAuthor) < 1 or len(projectAuthor) > 40:
-#         print("Please enter a name between 1-40 characters")
-#         continue
-#     else:
-#         break
-#
-# print("## PROJECT DETAILS ##")
-# print("Project name: " + projectName)
-# print("Author: " + projectAuthor)
 
+i = 0
+while True:
+    projectName = input("What is the title of your project? ")
+    state = bool(projectName.isidentifier())
+
+    if not state:
+        i += 1
+        if i == 3:
+            print("I give up")
+            exit()
+        else:
+            print("Invalid input, please try again")
+            continue
+    elif len(projectName) < 1 or len(projectName) > 40:
+        print("Please enter a name between 1-40 characters")
+        continue
+    else:
+        break
+
+# Validates user input length
+while True:
+    projectAuthor = input("Who is the author of this project? ")
+    if len(projectAuthor) < 1 or len(projectAuthor) > 40:
+        print("Please enter a name between 1-40 characters")
+        continue
+    else:
+        break
+
+print("## PROJECT DETAILS ##")
+print("Project name: " + projectName)
+print("Author: " + projectAuthor)
+
+# Code that didn't work
 # direct = "C:\\Users\\User\\PycharmProjects\\"
 # input_new = input("Enter a new Project folder name: ")
 # new_path = os.path.join(direct, input_new)
@@ -61,6 +63,7 @@ while True:
     direct = "C:\\Users\\User\\PycharmProjects\\"
     input_new = input("Enter a new Project folder name: ")
     new_path = os.path.join(direct, input_new)
+    # Code that didn't work
     # os.mkdir(new_path, mode=0o666)
     # print("Directory '% s' is built!" % new_path)
     #
@@ -69,12 +72,17 @@ while True:
         new_path = os.path.join(direct, input_new)
         if os.path.exists(new_path):
             print("Directory already exists")
-            continue
         else:
             os.mkdir(new_path, mode=0o666)
-            print("Directory '% s' is built!" % new_path)
+            print("Directory '% s' created at " % new_path)
             break
     else:
         os.mkdir(new_path, mode=0o666)
-        print("Directory '% s' is built!" % new_path)
+        print("Directory '% s' created at " % new_path)
         break
+
+with open(new_path + "/README.md", "+w") as text:
+    text.write(f"# {projectName} \n\n ## Description\n\nTODO \n\n ## How to install the project \n\nTODO\n\n ## How "
+               f"to run the project \n\nTODO\n\n ## Author\n\n{projectAuthor}")
+
+print("File '% s' created at " % new_path)
