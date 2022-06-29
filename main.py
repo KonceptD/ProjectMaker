@@ -15,12 +15,20 @@ import re
 # .ljust(40) was conflicting with my validation
 
 # Validates user input and length
+
+i = 0
 while True:
     projectName = input("What is the title of your project? ")
     state = bool(projectName.isidentifier())
+
     if not state:
-        print("Invalid input, please try again")
-        continue
+        i += 1
+        if i == 3:
+            print("I give up")
+            exit()
+        else:
+            print("Invalid input, please try again")
+            continue
     elif len(projectName) < 1 or len(projectName) > 40:
         print("Please enter a name between 1-40 characters")
         continue
