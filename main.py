@@ -1,7 +1,7 @@
 import re
 import os
 import random
-
+from jinja2 import Template
 # Milestones
 # 1. Ask for the project name and author
 # 2. Ask for Project date
@@ -74,15 +74,28 @@ while True:
             print("Directory already exists")
         else:
             os.mkdir(new_path, mode=0o666)
-            print("Directory '% s' created at " % new_path)
+            print(f"Directory created at {new_path}")
             break
     else:
         os.mkdir(new_path, mode=0o666)
-        print("Directory '% s' created at " % new_path)
+        print(f"Directory created at {new_path}")
         break
 
-with open(new_path + "/README.md", "+w") as text:
-    text.write(f"# {projectName} \n\n ## Description\n\nTODO \n\n ## How to install the project \n\nTODO\n\n ## How "
-               f"to run the project \n\nTODO\n\n ## Author\n\n{projectAuthor}")
+# with open(new_path + "/README.md", "+w") as text:
+#     text.write(f"# {projectName} \n\n ## Description\n\nTODO \n\n ## How to install the project \n\nTODO\n\n ## How "
+#                f"to run the project \n\nTODO\n\n ## Author\n\n{projectAuthor}")
+#
+# print("File '% s' created at " % new_path)
 
-print("File '% s' created at " % new_path)
+# Read Template file into a string
+readme_template_string = open("Templates/Template_README.html").read()
+
+# Turn the string into a "template object"
+readme_template = Template(readme_template_string)
+
+# Render the template by filling in the placeholders
+rendered_readme = readme_template.render(project_name=projectName,  project_author=projectAuthor)
+
+# Write the rendered output to a file
+open(new_path + "/README.html", "+w").write(rendered_readme)
+print(f"README File created at {new_path}")
