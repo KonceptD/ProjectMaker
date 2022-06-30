@@ -1,6 +1,5 @@
 import re
 import os
-import random
 from jinja2 import Template
 # Milestones
 # 1. Ask for the project name and author
@@ -87,7 +86,7 @@ while True:
 #
 # print("File '% s' created at " % new_path)
 
-# Read Template file into a string
+# Read README Template file into a string
 readme_template_string = open("Templates/Template_README.html").read()
 
 # Turn the string into a "template object"
@@ -97,5 +96,33 @@ readme_template = Template(readme_template_string)
 rendered_readme = readme_template.render(project_name=projectName,  project_author=projectAuthor)
 
 # Write the rendered output to a file
-open(new_path + "/README.html", "+w").write(rendered_readme)
+open(new_path + "/README.txt", "+w").write(rendered_readme)
 print(f"README File created at {new_path}")
+
+
+# Read TO DO Template file into a string
+readme_template_string = open("Templates/Template_TODO.html").read()
+
+# Turn the string into a "template object"
+readme_template = Template(readme_template_string)
+
+# Render the template by filling in the placeholders
+rendered_readme = readme_template.render(project_name=projectName,  project_author=projectAuthor)
+
+# Write the rendered output to a file
+open(new_path + "/TODO.txt", "+w").write(rendered_readme)
+print(f"TODO File created at {new_path}")
+
+
+# Read MAIN Template file into a string
+readme_template_string = open("Templates/Template_MAIN.py").read()
+
+# Turn the string into a "template object"
+readme_template = Template(readme_template_string)
+
+# Render the template by filling in the placeholders
+rendered_readme = readme_template.render(project_name=projectName,  project_author=projectAuthor)
+
+# Write the rendered output to a file
+open(new_path + "/main.py", "+w").write(rendered_readme)
+print(f"Main File created at {new_path}")
